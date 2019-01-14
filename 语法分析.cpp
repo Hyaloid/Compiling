@@ -13,7 +13,6 @@ char str[LEN];
 
 int main()
 {
-    cout<<"20169009 ÕÔº£É¼"<<endl;
     while(cin>>str)
     {
         i=0;
