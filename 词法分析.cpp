@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool key_words(string s)//¹Ø¼ü×Ö
+bool key_words(string s)//å…³é”®å­—
 {
     static vector<string> keyVec = { "main", "int", "float", "double", "char",
         "if", "then","else", "switch", "case", "break", "continue", "while",
@@ -12,11 +12,11 @@ bool key_words(string s)//¹Ø¼ü×Ö
         return true;
     else return false;
 }
-bool ident(string s)//±êÊ¶·û
+bool ident(string s)//æ ‡è¯†ç¬¦
 {
-    if (!key_words(s))//±êÊ¶·û²»ÄÜÊÇ¹Ø¼ü×Ö
+    if (!key_words(s))//æ ‡è¯†ç¬¦ä¸èƒ½æ˜¯å…³é”®å­—
     {
-        if ((s[0] >= 'a'&&s[0] <= 'z') || (s[0] >= 'A'&&s[0] <= 'Z'))//ÊÇ×ÖÄ¸
+        if ((s[0] >= 'a'&&s[0] <= 'z') || (s[0] >= 'A'&&s[0] <= 'Z'))//æ˜¯å­—æ¯
         {
             for (int i = 1; i < s.length(); i++)
             {
@@ -32,7 +32,7 @@ bool ident(string s)//±êÊ¶·û
     return false;
 }
 
-bool digit(string s)//ÕûÊı
+bool digit(string s)//æ•´æ•°
 {
     if (s[0] >= '0'&&s[0] <= '9')
     {
@@ -45,7 +45,7 @@ bool digit(string s)//ÕûÊı
     return false;
 }
 
-bool points(string s)//Ğ¡Êı
+bool points(string s)//å°æ•°
 {
     if (s[0] >= '0'&&s[0] <= '9')
     {
@@ -58,7 +58,7 @@ bool points(string s)//Ğ¡Êı
     return false;
 }
 
-bool is_operator(string s)//ÔËËã·û
+bool is_operator(string s)//è¿ç®—ç¬¦
 {
     static vector<string> opeVec = { "=","+","-","*","/","<","<=","==","!=",
         ">",">=",";","(",")","?",":",",","+=","-=" };
@@ -68,7 +68,7 @@ bool is_operator(string s)//ÔËËã·û
     else return false;
 }
 
-bool is_operator(char c)//ÔËËã·û
+bool is_operator(char c)//è¿ç®—ç¬¦
 {
     static vector<char> opeVec = { '=','+','-','*','/','<','>',';','(',')','?',':',',' };
     vector<char>::iterator result = find(opeVec.begin(), opeVec.end(), c);
@@ -77,46 +77,46 @@ bool is_operator(char c)//ÔËËã·û
     else return false;
 }
 
-string result(string s)//¸ù¾İ´«ÈëµÄ²ÎÊıs²úÉú¶ÔÓ¦µÄÊä³ö
+string result(string s)//æ ¹æ®ä¼ å…¥çš„å‚æ•°säº§ç”Ÿå¯¹åº”çš„è¾“å‡º
 {
-    //±êÊ¶·û
+    //æ ‡è¯†ç¬¦
     if (ident(s))
-        return "(±êÊ¶·û,"+s+")";
+        return "(æ ‡è¯†ç¬¦,"+s+")";
 
-    //¹Ø¼ü×Ö
+    //å…³é”®å­—
     if (key_words(s))
-        return "(¹Ø¼ü×Ö,"+s+")";
+        return "(å…³é”®å­—,"+s+")";
 
-    //ÕûĞÍ³£Á¿
+    //æ•´å‹å¸¸é‡
     if (digit(s))
-        return "(ÕûÊı,"+s+")";
+        return "(æ•´æ•°,"+s+")";
 
-    //Ğ¡Êı
+    //å°æ•°
     if (points(s))
-        return "(Ğ¡Êı,"+s+")";
+        return "(å°æ•°,"+s+")";
 
-    //ÔËËã·û
+    //è¿ç®—ç¬¦
     static map<string, string> opeMap;
-    opeMap["="] = "(µÈºÅ£¬=£©";
-    opeMap["<"] = "(Ğ¡ÓÚºÅ,<)";
-    opeMap["<="] = "(Ğ¡ÓÚµÈÓÚºÅ,<=)";
-    opeMap["+="] = "(¼ÓµÈÓÚºÅ,+=)";
-    opeMap["-="] = "(¼õµÈÓÚºÅ,-=)";
-    opeMap["=="] = "(¸³ÖµÔËËã·û£¬==£©";
-    opeMap["!="] = "(²»µÈÓÚºÅ,!=)";
-    opeMap[">"] = "(´óÓÚºÅ,>)";
-    opeMap[">="] = "(´óÓÚµÈÓÚºÅ,>=)";
-    opeMap[";"] = "(·ÖºÅ,;)";
-    opeMap["+"] = "(¼ÓºÅ,+)";
-    opeMap["("] = "(×óÀ¨ºÅ,( )";
-    opeMap["-"] = "(¼õºÅ,-)";
-    opeMap[")"] = "(ÓÒÀ¨ºÅ,) )";
-    opeMap[">"] = "(´óÓÚºÅ,>)";
-    opeMap["*"] = "(ĞÇºÅ,*)";
-    opeMap["?"] = "(ÎÊºÅ,?)";
-    opeMap["/"] = "(³ıºÅ,/)";
-    opeMap[":"] = "(Ã°ºÅ,:)";
-    opeMap[","] = "(¶ººÅ,,)";
+    opeMap["="] = "(ç­‰å·ï¼Œ=ï¼‰";
+    opeMap["<"] = "(å°äºå·,<)";
+    opeMap["<="] = "(å°äºç­‰äºå·,<=)";
+    opeMap["+="] = "(åŠ ç­‰äºå·,+=)";
+    opeMap["-="] = "(å‡ç­‰äºå·,-=)";
+    opeMap["=="] = "(èµ‹å€¼è¿ç®—ç¬¦ï¼Œ==ï¼‰";
+    opeMap["!="] = "(ä¸ç­‰äºå·,!=)";
+    opeMap[">"] = "(å¤§äºå·,>)";
+    opeMap[">="] = "(å¤§äºç­‰äºå·,>=)";
+    opeMap[";"] = "(åˆ†å·,;)";
+    opeMap["+"] = "(åŠ å·,+)";
+    opeMap["("] = "(å·¦æ‹¬å·,( )";
+    opeMap["-"] = "(å‡å·,-)";
+    opeMap[")"] = "(å³æ‹¬å·,) )";
+    opeMap[">"] = "(å¤§äºå·,>)";
+    opeMap["*"] = "(æ˜Ÿå·,*)";
+    opeMap["?"] = "(é—®å·,?)";
+    opeMap["/"] = "(é™¤å·,/)";
+    opeMap[":"] = "(å†’å·,:)";
+    opeMap[","] = "(é€—å·,,)";
     if (is_operator(s))
         return opeMap[s];
     return "Error";
@@ -124,38 +124,38 @@ string result(string s)//¸ù¾İ´«ÈëµÄ²ÎÊıs²úÉú¶ÔÓ¦µÄÊä³ö
 
 int main()
 {
-    string file = ("C:\\Users\\zhs\\Desktop\\test.txt");
+    string file = ("C:\\test.txt");
     ifstream input(file);
 
     ofstream output("C:\\Users\\zhs\\Desktop\\Result.txt",ofstream::app);
-    //ÏÈ½«testData.txtÄÚÈİ¿½±´µ½Result.txtÖĞ
+    //å…ˆå°†testData.txtå†…å®¹æ‹·è´åˆ°Result.txtä¸­
     string copy;
 
     getline(input, copy, '\0');
-    cout<< copy << endl;//²âÊÔÊÇ·ñÕıÈ·
+    cout<< copy << endl;//æµ‹è¯•æ˜¯å¦æ­£ç¡®
 
-    //´ËÊ±inputÒÑ¾­Ö¸µ½ÁËÎÄ¼şÎ²£¬ÎªÁËºóÃæµÄ¶ÁÈ¡£¬ĞèÒª¹Ø±ÕÔÙ´ò¿ª
+    //æ­¤æ—¶inputå·²ç»æŒ‡åˆ°äº†æ–‡ä»¶å°¾ï¼Œä¸ºäº†åé¢çš„è¯»å–ï¼Œéœ€è¦å…³é—­å†æ‰“å¼€
     input.close();
     input.open(file);
 
-    output << "Ô­Êı¾İ:\n";
+    output << "åŸæ•°æ®:\n";
     output << copy;
-    output << "´¦Àíºó½á¹û:\n20169009 ÕÔº£É¼\n";
+    output << "å¤„ç†åç»“æœ:\n";
 
     string str;
     string words;
 
-    cout << "´¦Àíºó½á¹û:\n20169009 ÕÔº£É¼\n";
-    int l=0;//¼ÆËãĞĞÊı
-    while (getline(input, str)) //¶ÁÈ¡ÎÄ¼şÃ¿Ò»´Î¶ÁÈ¡Ò»ĞĞ,Óöµ½EOF½áÊø
+    cout << "å¤„ç†åç»“æœ:\n";
+    int l=0;//è®¡ç®—è¡Œæ•°
+    while (getline(input, str)) //è¯»å–æ–‡ä»¶æ¯ä¸€æ¬¡è¯»å–ä¸€è¡Œ,é‡åˆ°EOFç»“æŸ
     {
         l++;
-        //´ÓÊäÈëÁ÷ÖĞ»ñÈ¡µ¥´Ê£¬ĞèÒªÓÃµ½ÊäÈëÁ÷¶ÔÏó£¬¼´istringstream
+        //ä»è¾“å…¥æµä¸­è·å–å•è¯ï¼Œéœ€è¦ç”¨åˆ°è¾“å…¥æµå¯¹è±¡ï¼Œå³istringstream
         istringstream strCin(str);
         string s;
         while (strCin >> words)
         {
-            //¹Ø¼ü×Ö¿Ï¶¨ÊÇµ¥¶À×÷ÎªÒ»¸öµ¥´ÊµÄ
+            //å…³é”®å­—è‚¯å®šæ˜¯å•ç‹¬ä½œä¸ºä¸€ä¸ªå•è¯çš„
             if (key_words(words))
             {
                 s = result(words);
@@ -164,16 +164,16 @@ int main()
                 continue;
             }
 
-            //¶Ôµ¥´Ê½øĞĞÉ¨Ãè£¬¿Ï¶¨ÊÇ±êÊ¶·û£¬ÔËËã·û£¬¶ººÅ·ÖºÅ,Êı×ÖµÈµÈ»ìºÏÔÚÒ»ÆğµÄµ¥´Ê
+            //å¯¹å•è¯è¿›è¡Œæ‰«æï¼Œè‚¯å®šæ˜¯æ ‡è¯†ç¬¦ï¼Œè¿ç®—ç¬¦ï¼Œé€—å·åˆ†å·,æ•°å­—ç­‰ç­‰æ··åˆåœ¨ä¸€èµ·çš„å•è¯
             vector<int> index = {0};
-            vector<string> mulWords;//½«words·Ö½âÎª¶à¸öµ¥´Ê
+            vector<string> mulWords;//å°†wordsåˆ†è§£ä¸ºå¤šä¸ªå•è¯
             for (int i = 0; i < words.length(); i++)
             {
 
-                //ÔËËã·ûÓĞÁ½Î»µÄ£¬±ÈÈç"<=",">=","==","!=","-=","+="
+                //è¿ç®—ç¬¦æœ‰ä¸¤ä½çš„ï¼Œæ¯”å¦‚"<=",">=","==","!=","-=","+="
                 if ((i < words.length() - 1) && is_operator(words[i]) && is_operator(words[i + 1]))
                 {
-                    //µ«ÊÇÒª×¢ÒâÖ»ÓĞÒÔÉÏ6ÖÖÁ½Î»ÔËËã·û£¬±ÈÈç+-,))¾Í²»ÊÇ,µ«ÊÇ))»¹ÊÇÒªÊä³ö),)
+                    //ä½†æ˜¯è¦æ³¨æ„åªæœ‰ä»¥ä¸Š6ç§ä¸¤ä½è¿ç®—ç¬¦ï¼Œæ¯”å¦‚+-,))å°±ä¸æ˜¯,ä½†æ˜¯))è¿˜æ˜¯è¦è¾“å‡º),)
                     if (string(words.begin() + i, words.begin() + i + 2) == "<=" ||
                         string(words.begin() + i, words.begin() + i + 2) == ">=" ||
                         string(words.begin() + i, words.begin() + i + 2) == "==" ||
@@ -194,11 +194,11 @@ int main()
 
                     }
                 }
-                //¶ººÅ£¬ÔËËã·û×÷Îª·Ö¸ô
+                //é€—å·ï¼Œè¿ç®—ç¬¦ä½œä¸ºåˆ†éš”
                  else if (is_operator(words[i]))
                 {
                     if (find(index.begin(), index.end(), i) == index.end())
-                    //±ÈÈçÓöµ½"a,b"ÕâÀïÏÂ±ê0ºÍ1½«a·Ö¿ª£¬1µ½2½«¶ººÅ·Ö¿ª£¬2µ½3½«b·Ö¿ª
+                    //æ¯”å¦‚é‡åˆ°"a,b"è¿™é‡Œä¸‹æ ‡0å’Œ1å°†aåˆ†å¼€ï¼Œ1åˆ°2å°†é€—å·åˆ†å¼€ï¼Œ2åˆ°3å°†båˆ†å¼€
                         index.push_back(i);
                     if (find(index.begin(), index.end(), i+1) == index.end())
                         index.push_back(i + 1);
@@ -208,7 +208,7 @@ int main()
             for (int i = 0; i < index.size()-1; i++)
             {
                 string rel;
-                //±ÈÈçÓöµ½"<="£¬ĞèÒªÌáÈ¡¡±<=¡°
+                //æ¯”å¦‚é‡åˆ°"<="ï¼Œéœ€è¦æå–â€<=â€œ
                 rel=result(string(words.begin() + index[i], words.begin() + index[i + 1]));
 
                 output <<"Line "<<l<<":"<< rel << endl;
